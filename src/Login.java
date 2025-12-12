@@ -131,9 +131,46 @@ public class Login extends JFrame{
     
 
      
-
+ //USER AUTHENTICATION
+        loginButton.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        authenticateUser();
+    }
+    });
     
     }
 
-    
+    private void authenticateUser() {
+        String correctUsername = new String(usernameTextField.getText());
+        String correctPassword = new String(passwordTextField.getPassword());
+
+        if (correctPassword.isEmpty() || correctUsername.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Username and Password cannot be empty", 
+                "Input Error", JOptionPane.ERROR_MESSAGE);
+                return;
+        }
+
+        boolean isAuthenticated = Authenticate(correctUsername,correctPassword);
+
+        if(isAuthenticated) {
+                JOptionPane.showMessageDialog(this, 
+                "Login Successful! Welcome, " + correctUsername + "!", 
+                "Success", 
+                JOptionPane.INFORMATION_MESSAGE);
+                
+        } else {
+                JOptionPane.showMessageDialog(this, 
+                "Invalid username or password.", 
+                "Login Failed", 
+                JOptionPane.ERROR_MESSAGE);
+
+                passwordTextField.setText("");
+        };
+    }
+
+    private boolean Authenticate(String username, String password) {
+        return true;
+    }
+
 }
